@@ -1,6 +1,6 @@
 {
-  "name": "botkit-matrix",
-  "version": "1.0.1",
+  "name": "botkit-matrix2",
+  "version": "1.0.4",
   "description": "A Botkit connector for Matrix",
   "main": "matrixConnector.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/frankgerhardt/botkit-matrix.git"
+    "url": "git+https://github.com/Sn0wAlice/botkit-matrix.git"
   },
   "keywords": [
     "matrix",
@@ -17,9 +17,9 @@
   "author": "Lukács Sándor",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/frankgerhardt/botkit-matrix/issues"
+    "url": "https://github.com/Sn0wAlice/botkit-matrix/issues"
   },
-  "homepage": "https://github.com/frankgerhardt/botkit-matrix#readme",
+  "homepage": "https://github.com/Sn0wAlice/botkit-matrix#readme",
   "dependencies": {
     "botkit": "^4.15.0",
     "matrix-js-sdk": "^26.0.0",
