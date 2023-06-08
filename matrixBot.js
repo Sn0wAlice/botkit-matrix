@@ -37,20 +37,18 @@ exports.createMatrixClient = async function(config, client, sdk, matrix_controll
         baseUrl: config.baseUrl,
         accessToken: localStorage.getItem('accessToken'),
         userId: localStorage.getItem('userId'),
-        sessionStore: new sdk.WebStorageSessionStore(localStorage),
         deviceId: localStorage.getItem('deviceId'),
     });
 
     // If syncing is ready, add the listeners to the bot.
-    client.matrixClient.once('sync', function (state, prevState, data) {
+    client.matrixClient.once('sync', async function (state, prevState, data) {
         switch (state) {
             case 'PREPARED':
-                matrix_controller.startTicking();
                 let bot = matrix_controller.spawn();
                 let startTime = Date.now();
 
                 // Listener for the room timeline
-                client.matrixClient.on("Room.timeline", function (event) {
+                client.matrixClient.on("Room.timeline", async function (event) {
 
                     let elapsedTime = Date.now() - startTime;
                     //   saving the event's own timestamp
@@ -70,7 +68,26 @@ exports.createMatrixClient = async function(config, client, sdk, matrix_controll
                     // We use the user's ID who sent the message as session ID
                     let sessionId = event.getSender();
 
-                    matrix_controller.ingest(bot, event, sessionId);
+                    matrix_controller.middleware.ingest.run(bot, event, async function (err, bot, event) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            matrix_controller.middleware.receive.run(bot, event, async function (err, bot, event) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    matrix_controller.trigger('message_received', {
+                                        event: event,
+                                        e: event.event,
+                                        client: client.matrixClient,
+                                        bot: (await bot),
+                                        middleware: matrix_controller.middleware,
+                                        sessionId: sessionId
+                                    });
+                                }
+                            });
+                        }
+                    });
                 });
 
                 // Join rooms automatically when invited
@@ -100,11 +117,20 @@ exports.createMatrixClient = async function(config, client, sdk, matrix_controll
                     }
                 });
 
+
                 console.log("MATRIXBOT IS READY!");
+                break;
+            case "RECONNECTING":
+                console.log("MATRIXBOT IS RECONNECTING!");
                 break;
             case 'ERROR':
                 console.log(data.err);
                 break;
+            case 'SYNCING':
+                console.log("MATRIXBOT IS SYNCING!");
+                break;
+            default:
+                console.log("MATRIXBOT IS IN AN UNKNOWN STATE!");
         }
     });
 

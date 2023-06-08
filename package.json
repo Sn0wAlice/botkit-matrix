@@ -1,6 +1,6 @@
 {
   "name": "botkit-matrix2",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A Botkit connector for Matrix",
   "main": "matrixConnector.js",
   "scripts": {
