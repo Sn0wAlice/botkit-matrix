@@ -34,7 +34,8 @@ For more features see [Botkit Core](https://botkit.ai/docs/core.html)
 - **Frank Gerhardt** - *management* - [frankgerhardt](https://github.com/frankgerhardt)
 - **Nándor Póka** - *management* - [nandor-poka](https://github.com/nandor-poka)
 - **Dániel Sabic** - *development* - [SabicDaniel](https://github.com/SabicDaniel)
-- **Sándor Lukács** - *development* - [lukacssandor](https://github.com/lukacssandor)
+- **Sándor Lukács** - *development* - [Sn0wAlice](https://github.com/lukacssandor)
+- **Alice Sn0w** - *development* - [lukacssandor](https://github.com/Sn0wAlice)
 
 ### License
 
