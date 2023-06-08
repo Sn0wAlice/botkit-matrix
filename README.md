@@ -4,7 +4,7 @@ A Botkit connector for Matrix
 
 ### Install
 
-```$ npm install botkit-matrix```
+```$ npm install botkit-matrix2```
 
 ### Usage
 
@@ -16,7 +16,7 @@ let config = {
     'localStorage': 'filepath'
 };
 
-require('botkit-matrix').MatrixController(config)
+require('botkit-matrix2').MatrixController(config)
 .then((controller) => {
 
     controller.hears(['hi', 'hello'], 'message_received', function (bot, message) {
